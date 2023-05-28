@@ -11,7 +11,8 @@ IPC::IPC(uint32_t profileId)
     : profileId{profileId}
     , globalMemory{"ipc-" IPC_PROTOCOL_VERSION}
 {
-    qRegisterMetaType<IPCEventHandler>("IPCEventHandler");
+//    qRegisterMetaType<IPCEventHandler>("IPCEventHandler");
+    qRegisterMetaType<IPCEventHandler>("IPEventHandler"); //  TODO(@ly) 这个好像是共享内存注册的ID？
     timer.setInterval(EVENT_TIMER_MS);
     timer.setSingleShot(true);
     connect(&timer, &QTimer::timeout, this, &IPC::processEvents);

@@ -5,14 +5,9 @@ project(SdWebLauncher VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
+find_package(Qt6 6.2 COMPONENTS Quick Core Qml REQUIRED)
 
-# 添加要包含的目录
-set(SOURCE_FILES
-    src/main.cpp
-)
-
-# 添加目录下的所有cpp和.h文件
+# 添加目录下的所有cpp .h .qml
 file(GLOB_RECURSE ADDITIONAL_SOURCE_FILES
     src/*.cpp
     src/*.h
@@ -22,8 +17,10 @@ file(GLOB_RECURSE ADDITIONAL_SOURCE_FILES
 # 将源文件和附加文件合并
 list(APPEND SOURCE_FILES ${ADDITIONAL_SOURCE_FILES})
 
-qt6_add_resources(QT_RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/qml/qml_resource.qrc)
-
+qt6_add_resources(QT_RESOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/image_resource.qrc
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/qml/qml_resource.qrc
+)
 
 qt_add_executable(appSdWebLauncher
     ${SOURCE_FILES}
@@ -36,18 +33,6 @@ qt_add_qml_module(appSdWebLauncher
     VERSION 1.0
     QML_FILES src/qml/main.qml
 )
-
-
-
-# TODO(@ly) 后面发包需要用到这个
-#if (CMAKE_BUILD_TYPE MATCHES "Release")
-#    add_executable(appSdWebLauncher ${TaoQuickRes})
-#else()
-#    add_executable(appSdWebLauncher ${PROJECT_NAME})
-#endif()
-
-set(TAOQUICK_PATH ${CMAKE_CURRENT_SOURCE_DIR}/3trdparty/taoQuick.cmake)
-include(${TAOQUICK_PATH})
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3trdparty/FluentUI)
 

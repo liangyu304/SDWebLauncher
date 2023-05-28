@@ -41,7 +41,7 @@ void AppInfo::changeLang(const QString& locale){
 }
 
 bool AppInfo::isOwnerProcess(IPC *ipc){
-    QString activeWindowEvent = "activeWindow";
+    QString activeWindowEvent = "SDWebUi";
     if(!ipc->isCurrentOwner()){
         ipc->postEvent(activeWindowEvent,QString().toUtf8(),0);
         return false;

@@ -4,12 +4,13 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Qt.labs.platform
 import FluentUI
+
 import "../component"
 
 CustomWindow {
 
     id:window
-    title: "FluentUI"
+    title: "Ly SdWebUi Launcher"
     width: 1280
     height: 720
     closeDestory:false
@@ -35,7 +36,7 @@ CustomWindow {
     SystemTrayIcon {
         id:system_tray
         visible: true
-//        icon.source: "qrc:/example/res/image/favicon.ico"
+        icon.source: "qrc:/resource/ico/test.ico"
         tooltip: "Ly SdWebUi Launcher"
         menu: Menu {
             MenuItem {
@@ -87,8 +88,29 @@ CustomWindow {
         z:7
     }
 
+    FluObject{
+        property var navigationView
+
+        id:test
+        FluPaneItem{
+            title:lang.home
+            icon:FluentIcons.Home
+                   cusIcon: Image{
+                       anchors.centerIn: parent
+                       source: FluTheme.dark ? "qrc:/resource/svg/home_dark.svg" : "qrc:/resource/svg/home.svg"
+                       sourceSize: Qt.size(30,30)
+                       width: 18
+                       height: 18
+                   }
+            onTap:{
+                navigationView.push("qrc:/example/qml/page/T_Home.qml")
+            }
+        }
+    }
+
     FluNavigationView{
         id:nav_view
+        width:200
         anchors{
             top: parent.top
             left: parent.left
@@ -96,12 +118,12 @@ CustomWindow {
             bottom: parent.bottom
         }
         z:999
-        items: ItemsOriginal
+        items: test
         footerItems:ItemsFooter
         topPadding:FluTools.isMacos() ? 20 : 5
         displayMode:MainEvent.displayMode
-//        logo: "qrc:/example/res/image/favicon.ico"
-        title:"Ly SdWebUi Launcher"
+        logo: "qrc:/resource/ico/test.ico"
+        title:"FluentUI"
         autoSuggestBox:FluAutoSuggestBox{
             width: 280
             anchors.centerIn: parent
@@ -116,6 +138,7 @@ CustomWindow {
         Component.onCompleted: {
             ItemsOriginal.navigationView = nav_view
             ItemsFooter.navigationView = nav_view
+            test.navigationView = nav_view
             nav_view.setCurrentIndex(0)
         }
     }

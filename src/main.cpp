@@ -38,11 +38,7 @@ int main(int argc, char *argv[])
     FramelessHelper::Quick::registerTypes(&engine);
     appInfo->init(&engine);
 
-//    const QUrl url(u"qrc:/SdWebLauncher/src/qml/main.qml"_qs);
     const QUrl url("qrc:/main.qml");
-
-//    const QUrl url(u"qrc:/SdWebLauncher/src/qml/window/.qml"_qs);
-    //  const QUrl url(QStringLiteral("qrc:/example/qml/TestWindow.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject *obj, const QUrl &objUrl) {
             if (!obj && url == objUrl)
