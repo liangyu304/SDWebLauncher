@@ -4,7 +4,6 @@ import FluentUI
 import org.wangwenx190.FramelessHelper
 
 FluWindow {
-
     id:window
 
     property bool fixSize
@@ -12,6 +11,7 @@ FluWindow {
     property bool appBarVisible: true
     default property alias content: container.data
 
+    // 深色/浅色模式
     FluAppBar {
         id: title_bar
         title: window.title
