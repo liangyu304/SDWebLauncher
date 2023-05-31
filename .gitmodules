@@ -4,3 +4,6 @@
 [submodule "3trdparty/FluentUI"]
 	path = 3trdparty/FluentUI
 	url = https://github.com/zhuzichu520/FluentUI
+[submodule "3trdparty/framelesshelper"]
+	path = 3trdparty/framelesshelper
+	url = https://github.com/wangwenx190/framelesshelper
