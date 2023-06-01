@@ -2,7 +2,7 @@
 #define LANG_H
 
 #include <QObject>
-#include "../stdafx.h"
+#include "src/stdafx.h"
 
 class Lang : public QObject
 {

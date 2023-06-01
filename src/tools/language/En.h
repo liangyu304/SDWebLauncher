@@ -2,7 +2,7 @@
 #define EN_H
 
 #include <QObject>
-#include "Lang.h"
+#include "src/tools/language/Lang.h"
 
 class En : public Lang
 {

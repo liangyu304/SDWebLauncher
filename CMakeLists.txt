@@ -6,6 +6,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.2 COMPONENTS Quick Core Qml REQUIRED)
+find_package(FramelessHelper REQUIRED COMPONENTS Quick Core)
 
 # 添加目录下的所有cpp .h .qml
 file(GLOB_RECURSE ADDITIONAL_SOURCE_FILES
@@ -22,21 +23,22 @@ qt6_add_resources(QT_RESOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/qml/qml_resource.qrc
 )
 
-qt_add_executable(appSdWebLauncher
+qt_add_executable(${PROJECT_NAME}
     ${SOURCE_FILES}
-    ${TaoQuickRes}
     ${QT_RESOURCES}
 )
 
-qt_add_qml_module(appSdWebLauncher
+qt_add_qml_module(${PROJECT_NAME}
     URI SdWebLauncher
     VERSION 1.0
     QML_FILES src/qml/main.qml
 )
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3trdparty/FluentUI)
+# 设置可执行文件输出路径
+# SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../bin) 
+SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}/bin)
 
-set_target_properties(appSdWebLauncher PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -44,13 +46,12 @@ set_target_properties(appSdWebLauncher PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(appSdWebLauncher
+target_link_libraries(${PROJECT_NAME}
     PRIVATE Qt6::Quick
-    fluentuiplugin
     FramelessHelper::Core
     FramelessHelper::Quick
 )
 
-install(TARGETS appSdWebLauncher
+install(TARGETS ${PROJECT_NAME}
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
