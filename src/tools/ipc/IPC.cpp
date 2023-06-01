@@ -1,4 +1,4 @@
-#include "IPC.h"
+#include "src/tools/ipc/IPC.h"
 
 #include <QCoreApplication>
 #include <QDebug>

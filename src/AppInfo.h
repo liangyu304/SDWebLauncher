@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QQmlApplicationEngine>
-#include "tool/IPC.h"
-#include "lang/Lang.h"
-#include "stdafx.h"
+#include "src/tools/ipc/IPC.h"
+#include "src/tools/language/Lang.h"
+#include "src/stdafx.h"
 
 class AppInfo : public QObject
 {

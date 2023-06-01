@@ -2,8 +2,8 @@
 
 #include <QQmlContext>
 #include <QDebug>
-#include "lang/En.h"
-#include "lang/Zh.h"
+#include "src/tools/language/En.h"
+#include "src/tools/language/Zh.h"
 
 #define STR(x) #x
 #define VER_JOIN(a,b,c,d) STR(a.b.c.d)

@@ -34,7 +34,9 @@ qt_add_qml_module(${PROJECT_NAME}
     QML_FILES src/qml/main.qml
 )
 
-#add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/3trdparty/FluentUI)
+# 设置可执行文件输出路径
+# SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../bin) 
+SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}/bin)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
