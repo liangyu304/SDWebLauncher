@@ -15,8 +15,8 @@ FluWindow {
     FluAppBar {
         id: title_bar
         title: window.title
-        visible: window.appBarVisible
-        anchors {
+        visible: window.appBarVisible // 隐藏windows状态栏
+        anchors { // 位置相关，但具体不太明白
             top: parent.top
             left: parent.left
             right: parent.right

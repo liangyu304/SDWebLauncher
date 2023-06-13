@@ -3,5 +3,7 @@
         <file>resource/ico/test.ico</file>
         <file>resource/svg/home.svg</file>
         <file>resource/svg/home_dark.svg</file>
+        <file>resource/image/ic_home_github.png</file>
+        <file>resource/image/bg_home_header.png</file>
     </qresource>
 </RCC>
