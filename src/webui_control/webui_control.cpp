@@ -4,6 +4,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QCoreApplication>
+#include <QTimer>
 
 WebUiControl::WebUiControl(QObject *parent)
     : QObject{parent}
@@ -13,6 +14,8 @@ WebUiControl::WebUiControl(QObject *parent)
     connect(process_, &QProcess::readyRead, this, [=](){
         QByteArray output = process_->readAll();
         qDebug() << QString::fromLocal8Bit(output);
+        cmd_ = QString::fromLocal8Bit(output);
+        emit cmdChanged();
     });
 
     process_->setProcessChannelMode(QProcess::MergedChannels);
@@ -26,13 +29,26 @@ WebUiControl::~WebUiControl()
 
 void WebUiControl::StartWebUi()
 {
-    QStringList agentName;
-    agentName << "E:/stable-diffusion-webui/launch.py";
-    process_->setArguments(agentName);
-    process_->start();
+    auto *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, [=](){
+        cmd_ = "test11111111111111111111111111111111111 \r\n";
+        emit cmdChanged();
+    });
+
+    timer->start(100);
+
+//    QStringList agentName;
+//    agentName << "-u" << "E:/stable-diffusion-webui/launch.py" << "--xformers";
+//    process_->setArguments(agentName);
+//    process_->start();
 }
 
 void WebUiControl::StopWebUi()
 {
-    process_->close();
+//    process_->close();
+}
+
+void WebUiControl::setName(QString name)
+{
+
 }

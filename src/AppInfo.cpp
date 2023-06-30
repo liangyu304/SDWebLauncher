@@ -41,16 +41,16 @@ void AppInfo::changeLang(const QString& locale){
 }
 
 bool AppInfo::isOwnerProcess(IPC *ipc){
-    QString activeWindowEvent = "SDWebUi";
-//    if(!ipc->isCurrentOwner()){
-//        ipc->postEvent(activeWindowEvent,QString().toUtf8(),0);
-//        return false;
-//    }
-//    if(ipc->isAttached()){
-//        ipc->registerEventHandler(activeWindowEvent,[=](const QByteArray&){
-//            Q_EMIT this->activeWindow();
-//            return true;
-//        });
-//    }
+    QString activeWindowEvent = "SDWebUiLauncher";
+    if(!ipc->isCurrentOwner()){
+        ipc->postEvent(activeWindowEvent,QString().toUtf8(),0);
+        return false;
+    }
+    if(ipc->isAttached()){
+        ipc->registerEventHandler(activeWindowEvent,[=](const QByteArray&){
+            Q_EMIT this->activeWindow();
+            return true;
+        });
+    }
     return true;
 }

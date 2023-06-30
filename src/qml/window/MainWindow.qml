@@ -97,7 +97,6 @@ CustomWindow {
         id:items_footer
     }
 
-
     FluNavigationView{
         id: nav_view
         title: "导航栏"
@@ -108,13 +107,13 @@ CustomWindow {
             bottom: parent.bottom
         }
         items: items_view
-        footerItems:items_footer
+//        footerItems:items_footer
         logo: "qrc:/resource/ico/test.ico"
         autoSuggestBox:FluAutoSuggestBox{
             width: 280
             anchors.centerIn: parent
             iconSource: FluentIcons.Search
-            items: items_view.getSearchData()
+//            items: items_view.getSearchData()
             placeholderText: lang.search
             onItemClicked:
                 (data)=>{
@@ -123,7 +122,7 @@ CustomWindow {
         }
         Component.onCompleted: {
             items_view.navigationView = nav_view
-            items_footer.navigationView = nav_view
+//            items_footer.navigationView = nav_view
             nav_view.setCurrentIndex(0)
         }
     }

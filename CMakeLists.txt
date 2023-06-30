@@ -36,6 +36,7 @@ qt_add_qml_module(${PROJECT_NAME}
     URI SdWebLauncher
     VERSION 1.0
     QML_FILES src/qml/main.qml
+    ${GLOB_RECURSE}
 )
 
 # 设置可执行文件输出路径

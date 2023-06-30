@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Controls
 import FluentUI
+import SdWebLauncher
 
 FluScrollablePage{
     ListModel{
@@ -140,6 +141,13 @@ FluScrollablePage{
     CmdWindow{
         id:cmd_window
         visible: false
+        onVisibilityChanged: {
+            if(visible == true){
+                btn_start.text = "已启动"
+            } else {
+                btn_start.text = "启动"
+            }
+        }
     }
 
     // 启动按钮
@@ -162,21 +170,9 @@ FluScrollablePage{
         normalColor:"pink"
         onClicked: {
             if(btn_start.text === "启动"){
-                btn_start.text = "停止"
-//                WebUiControl.StartWebUi();
+                webUiControl.StartWebUi();
                 cmd_window.setVisible(true);
-            } else {
-                btn_start.text = "启动"
-//                WebUiControl.StopWebUi();
             }
-        }
-    }
-
-    Connections {
-        target: WebUiControl // 替换为 C++ 对象的实际名称
-        // 接收来自 C++ 的信号
-        onMessageReceived: {
-            console.log("Received message:", message);
         }
     }
 }
