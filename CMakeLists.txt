@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
 project(SdWebLauncher VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick Core Qml REQUIRED)
+find_package(Qt6 COMPONENTS Quick Core Qml REQUIRED)
 find_package(FramelessHelper REQUIRED COMPONENTS Quick Core)
 
 # 添加目录下的所有cpp .h .qml
