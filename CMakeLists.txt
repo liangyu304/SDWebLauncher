@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
 project(SdWebLauncher VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick Core Qml REQUIRED)
+find_package(Qt6 COMPONENTS Quick Core Qml REQUIRED)
 find_package(FramelessHelper REQUIRED COMPONENTS Quick Core)
 
 # 添加目录下的所有cpp .h .qml
@@ -36,10 +36,11 @@ qt_add_qml_module(${PROJECT_NAME}
     URI SdWebLauncher
     VERSION 1.0
     QML_FILES src/qml/main.qml
+    ${GLOB_RECURSE}
 )
 
 # 设置可执行文件输出路径
-# SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../bin) 
+# SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../bin)
 SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_BUILD_TYPE}/bin)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

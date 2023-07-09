@@ -9,10 +9,12 @@
 #include "AppInfo.h"
 #include <QFile>
 #include <QDebug>
+#include "src/webui_control/webui_control.h"
+#include <QQmlEngine>
 
 FRAMELESSHELPER_USE_NAMESPACE
 
-int main(int argc, char *argv[])
+    int main(int argc, char *argv[])
 {
     //将样式设置为Basic，不然会导致组件显示异常
     qputenv("QT_QUICK_CONTROLS_STYLE","Basic");
@@ -28,15 +30,24 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_MACOS
     FramelessConfig::instance()->set(Global::Option::ForceNonNativeBackgroundBlur,false);
 #endif
-    AppInfo* appInfo = new AppInfo();
-    IPC ipc(0);
-    if(!appInfo->isOwnerProcess(&ipc)){
-        return 0;
-    }
+
+
+
+//    AppInfo* appInfo = new AppInfo();
+//    IPC ipc(0);
+//    if(!appInfo->isOwnerProcess(&ipc)){
+//        return 0;
+//    }
     app.setQuitOnLastWindowClosed(false);
     QQmlApplicationEngine engine;
+
+    // 将 C++ 对象注册到 QML 上下文中
+    WebUiControl webUiControl; // 实例化 C++ 对象
+    engine.rootContext()->setContextProperty("webUiControl", &webUiControl);
+    qmlRegisterType<WebUiControl>("com.mycompany.webUiControl", 1, 0, "webUiControl");
+
     FramelessHelper::Quick::registerTypes(&engine);
-    appInfo->init(&engine);
+//    appInfo->init(&engine);
 
     const QUrl url("qrc:/main.qml");
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

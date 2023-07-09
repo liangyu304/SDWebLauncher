@@ -6,6 +6,7 @@ import Qt.labs.platform
 import FluentUI
 
 import "../component"
+import "../navigation_bar"
 
 CustomWindow {
 
@@ -83,62 +84,45 @@ CustomWindow {
             left: parent.left
             right: parent.right
         }
-        darkText: lang.dark_mode
+        darkText: "主题切换"
         showDark: true
         z:7
     }
 
-    FluObject{
-        property var navigationView
+    ItemsView{
+        id:items_view
+    }
 
-        id:test
-        FluPaneItem{
-            title:lang.home
-            icon:FluentIcons.Home
-                   cusIcon: Image{
-                       anchors.centerIn: parent
-                       source: FluTheme.dark ? "qrc:/resource/svg/home_dark.svg" : "qrc:/resource/svg/home.svg"
-                       sourceSize: Qt.size(30,30)
-                       width: 18
-                       height: 18
-                   }
-            onTap:{
-                navigationView.push("qrc:/example/qml/page/T_Home.qml")
-            }
-        }
+    ItemsFooter{
+        id:items_footer
     }
 
     FluNavigationView{
-        id:nav_view
-        width:200
+        id: nav_view
+        title: "导航栏"
         anchors{
             top: parent.top
             left: parent.left
             right: parent.right
             bottom: parent.bottom
         }
-        z:999
-        items: test
-        footerItems:ItemsFooter
-        topPadding:FluTools.isMacos() ? 20 : 5
-        displayMode:MainEvent.displayMode
+        items: items_view
+//        footerItems:items_footer
         logo: "qrc:/resource/ico/test.ico"
-        title:"FluentUI"
         autoSuggestBox:FluAutoSuggestBox{
             width: 280
             anchors.centerIn: parent
             iconSource: FluentIcons.Search
-            items: ItemsOriginal.getSearchData()
+//            items: items_view.getSearchData()
             placeholderText: lang.search
             onItemClicked:
                 (data)=>{
-                    ItemsOriginal.startPageByItem(data)
+                    items_view.startPageByItem(data)
                 }
         }
         Component.onCompleted: {
-            ItemsOriginal.navigationView = nav_view
-            ItemsFooter.navigationView = nav_view
-            test.navigationView = nav_view
+            items_view.navigationView = nav_view
+//            items_footer.navigationView = nav_view
             nav_view.setCurrentIndex(0)
         }
     }
